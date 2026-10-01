@@ -4,23 +4,26 @@
 # A BVH joint's rotation moves the segment from that joint to its child, which is why `dir` is the child joint.
 # Bones not listed (fingers, twist bones, breasts) keep their rest pose relative to their parent.
 root_translation:
-  src: Hips            # hip translation is copied (scaled by leg-length ratio) onto the target `pelvis_bone`
+  # The pelvis is placed so the midpoint of the two hip joints follows the scaled source hip-joint midpoint
+  # (translation relative to the T-pose frame, scaled by the leg-length ratio).
+  src: [LeftUpLeg, RightUpLeg]
   target: pelvis
+  children: [thigh_L, thigh_R]
 bones:
-  pelvis:      {src: Hips,          dir: LowerBack}
+  pelvis:      {src: Hips,          dir: Spine}      # LowerBack sits at zero offset from Hips in CMU files
   spine01:     {src: LowerBack,     dir: Spine}
   spine02:     {src: Spine,         dir: Spine1}
-  spine03:     {src: Spine1,        dir: Neck}
+  spine03:     {src: Spine1,        dir: Neck1}
   neck:        {src: Neck,          dir: Head}
   head:        {src: Head,          dir: Head_End}
   clavicle_L:  {src: LeftShoulder,  dir: LeftArm}
   upperarm_L:  {src: LeftArm,       dir: LeftForeArm}
   lowerarm_L:  {src: LeftForeArm,   dir: LeftHand}
-  hand_L:      {src: LeftHand,      dir: LeftFingerBase}
+  hand_L:      {src: LeftHand,      dir: LeftHandIndex1}
   clavicle_R:  {src: RightShoulder, dir: RightArm}
   upperarm_R:  {src: RightArm,      dir: RightForeArm}
   lowerarm_R:  {src: RightForeArm,  dir: RightHand}
-  hand_R:      {src: RightHand,     dir: RightFingerBase}
+  hand_R:      {src: RightHand,     dir: RightHandIndex1}
   thigh_L:     {src: LeftUpLeg,     dir: LeftLeg}
   calf_L:      {src: LeftLeg,       dir: LeftFoot}
   foot_L:      {src: LeftFoot,      dir: LeftToeBase}

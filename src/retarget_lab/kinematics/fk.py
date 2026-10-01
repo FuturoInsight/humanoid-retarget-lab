@@ -130,29 +130,84 @@ def compose(axes: np.ndarray, angles: np.ndarray) -> np.ndarray:
     return r
 
 
-def decompose_tracked(r: np.ndarray, axes: np.ndarray, limits_deg: np.ndarray | None = None) -> np.ndarray:
-    """Euler-decompose a sequence of rotations onto signed principal axes, frame to frame.
+def _euler_first_frame(r0: np.ndarray, axes: np.ndarray, lim: np.ndarray | None) -> np.ndarray:
+    cands = euler_solutions(r0[None], axes)[0]
+    score = 1e-3 * np.abs(cands).sum(axis=1)
+    if lim is not None:
+        score = score + (np.maximum(lim[:, 0] - cands, 0) + np.maximum(cands - lim[:, 1], 0)).sum(axis=1)
+    return cands[int(np.argmin(score))]
 
-    Per frame picks the branch that (1) lies inside the limits (if given) and then (2) is closest to the
-    previous frame, so angles stay continuous through the middle-angle singularity. Returns (N, k) radians.
+
+def decompose_tracked(
+    r: np.ndarray,
+    axes: np.ndarray,
+    limits_deg: np.ndarray | None = None,
+    iters: int = 12,
+    damping: float = 0.15,
+) -> np.ndarray:
+    """Decompose a sequence of rotations onto signed principal axes with temporal continuity.
+
+    * 3 axes (shoulder, hip): exact. Closed-form Euler (branch chosen inside the limits) for the first frame, then
+      damped Gauss-Newton from the previous frame's angles, so the solution never flips branches and, at the
+      middle-angle singularity, moves the angles by the minimum amount. `_canonical_branch` finally undoes any
+      winding onto the alternate branch.
+    * 1-2 axes (waist, head, wrist, elbow, knee, ankle): the rotation has components the joints cannot realise, so
+      this is a tracked least-squares fit (minimise the rotation error), which has no gimbal problem and spreads
+      the unrealisable residual instead of dropping a branch-dependent third angle.
+    Returns (N, k) radians.
     """
-    sols = euler_solutions(r, axes)
     lim = None if limits_deg is None else np.deg2rad(limits_deg)
-    out = np.zeros((sols.shape[0], sols.shape[2]))
-    prev = None
-    for t in range(sols.shape[0]):
-        cands = sols[t]
-        score = np.zeros(2)
-        if lim is not None:
-            over = np.maximum(lim[:, 0] - cands, 0) + np.maximum(cands - lim[:, 1], 0)
-            score += 10.0 * over.sum(axis=1)
-        if prev is not None:
-            score += np.abs(wrap_pi(cands - prev)).sum(axis=1)
-        else:
-            score += 1e-3 * np.abs(cands).sum(axis=1)
-        cur = cands[int(np.argmin(score))].copy()
-        if prev is not None:
-            cur = prev + wrap_pi(cur - prev)  # unwrap
-        out[t] = cur
-        prev = cur
-    return out
+    n, k = r.shape[0], len(axes)
+    exact = k == 3
+    out = np.zeros((n, k))
+    if exact:
+        out[0] = _euler_first_frame(r[0], axes, lim)
+    sols = euler_solutions(r, axes) if exact else None
+    for t in range(n):
+        if t == 0 and exact:
+            continue
+        q = out[t - 1].copy() if t > 0 else np.zeros(k)
+        n_it = iters if t > 0 else 60
+        ok = False
+        for _ in range(n_it):
+            cur = np.eye(3)
+            cols = []
+            for i in range(k):
+                cols.append(cur @ axes[i])
+                cur = cur @ axis_rot(axes[i], q[i])
+            err = Rotation.from_matrix(r[t] @ cur.T).as_rotvec()
+            j = np.stack(cols, axis=1)  # (3, k)
+            dq = np.linalg.solve(j.T @ j + damping**2 * np.eye(k), j.T @ err)
+            q = q + dq * min(1.0, 0.5 / max(np.linalg.norm(dq), 1e-12))  # cap the step (rad)
+            if np.linalg.norm(dq) < 1e-9:
+                ok = True
+                break
+        if exact and not ok:
+            cur = compose(axes, q[None])[0]
+            if np.linalg.norm(Rotation.from_matrix(r[t] @ cur.T).as_rotvec()) > 1e-4:
+                c = sols[t]
+                prev = out[t - 1]
+                q = prev + wrap_pi(c[int(np.argmin(np.abs(wrap_pi(c - prev)).sum(axis=1)))] - prev)
+        out[t] = q
+    return _canonical_branch(out, axes, lim) if exact else out
+
+
+def _canonical_branch(q: np.ndarray, axes: np.ndarray, lim: np.ndarray | None, margin_deg: float = 30.0) -> np.ndarray:
+    """Wrap angles to (-pi, pi] and move frames that wound onto the alternate Euler branch back.
+
+    Gauss-Newton tracking is continuous but can run through the singularity onto the alternate branch
+    (pitch+180, roll=180-roll, yaw+180), which describes the same rotation with absurd angles. A frame switches to
+    the alternate branch only if that cuts the joint-limit excess by more than `margin_deg`, so genuinely
+    out-of-limit motion (e.g. bending 100 deg at a 60 deg waist) is left alone instead of being "fixed".
+    """
+    if lim is None:
+        return wrap_pi(q)
+    _, signs = _letters(axes)
+    cur = wrap_pi(q)
+    alt = wrap_pi(np.stack([q[:, 0] + signs[0] * np.pi, signs[1] * np.pi - q[:, 1], q[:, 2] + signs[2] * np.pi], axis=1))
+
+    def excess(a):
+        return (np.maximum(lim[:, 0] - a, 0) + np.maximum(a - lim[:, 1], 0)).sum(axis=1)
+
+    use_alt = excess(cur) - excess(alt) > np.deg2rad(margin_deg)
+    return np.where(use_alt[:, None], alt, cur)
