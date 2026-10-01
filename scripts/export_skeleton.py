@@ -10,6 +10,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import bpy  # noqa: E402
+
 from _common import find_character_armature, script_args  # noqa: E402
 
 args = script_args(("--out", dict(required=True)))

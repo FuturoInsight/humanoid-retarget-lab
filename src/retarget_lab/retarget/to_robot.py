@@ -35,10 +35,6 @@ from .ik import solve_arm_ik
 # Blender world (Z up, character faces -Y, +X left)  ->  robot world (x forward, y left, z up)
 F_BR = np.array([[0.0, -1.0, 0.0], [1.0, 0.0, 0.0], [0.0, 0.0, 1.0]])
 X, Y, Z = np.eye(3)
-FULL = np.array([-180.0, 180.0])
-# The third (dropped) angle of each decomposition is a residual the robot cannot realise. Giving it a +-30..45 deg
-# range lets branch selection prefer the representation with a small residual instead of one that flips it by 180.
-RES30, RES45 = np.array([-30.0, 30.0]), np.array([-45.0, 45.0])
 
 
 @dataclass
@@ -116,7 +112,13 @@ def retarget_joint_angles(bones: BoneData, robot: RobotSkeleton) -> RobotMotion:
     )
     s_root = robot.hip_height_m / rest_mid[2]
     rel_xy = (mid - mid[0]) @ F_BR.T
-    base_pos = np.column_stack([s_root * rel_xy[:, 0], s_root * rel_xy[:, 1], robot.hip_height_m + s_root * (mid[:, 2] - rest_mid[2])])
+    base_pos = np.column_stack(
+        [
+            s_root * rel_xy[:, 0],
+            s_root * rel_xy[:, 1],
+            robot.hip_height_m + s_root * (mid[:, 2] - rest_mid[2]),
+        ]
+    )
 
     # --- waist (yaw, pitch) + dropped roll
     wc = robot.chains["waist"]
@@ -173,7 +175,9 @@ def retarget_ik(robot: RobotSkeleton, motion: RobotMotion, iters: int = 25) -> R
     torso = body_fk(robot, motion.q)["waist"][:, -1]
     for side in ("left", "right"):
         sl = robot.chain_slice(f"{side}_arm")
-        q[:, sl] = solve_arm_ik(robot.chains[f"{side}_arm"], torso, motion.q[:, sl], motion.targets[side], iters=iters)
+        q[:, sl] = solve_arm_ik(
+            robot.chains[f"{side}_arm"], torso, motion.q[:, sl], motion.targets[side], iters=iters
+        )
     return RobotMotion(motion.fps, q, motion.base_pos, motion.heading, motion.targets, "ik_refined")
 
 

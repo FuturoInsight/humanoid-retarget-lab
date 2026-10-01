@@ -1,0 +1,1217 @@
+{
+ "armature": "m_ca01_skeleton",
+ "blender_version": "4.0.2",
+ "units": "metre",
+ "axes": "Z up, character faces -Y, +X is the character's left",
+ "height_m": 1.8317,
+ "n_bones": 71,
+ "bones": [
+  {
+   "name": "root",
+   "parent": null,
+   "head": [
+    0.0,
+    0.05284,
+    0.05616
+   ],
+   "tail": [
+    -0.0,
+    -0.18779,
+    0.01297
+   ],
+   "rest_length": 0.24448,
+   "depth": 0,
+   "deform": true
+  },
+  {
+   "name": "pelvis",
+   "parent": "root",
+   "head": [
+    0.0,
+    -0.02081,
+    0.88836
+   ],
+   "tail": [
+    -0.0,
+    0.01573,
+    1.09177
+   ],
+   "rest_length": 0.20666,
+   "depth": 1,
+   "deform": true
+  },
+  {
+   "name": "thigh_R",
+   "parent": "pelvis",
+   "head": [
+    -0.11647,
+    -0.00712,
+    0.99023
+   ],
+   "tail": [
+    -0.1533,
+    0.00052,
+    0.53242
+   ],
+   "rest_length": 0.45936,
+   "depth": 2,
+   "deform": true
+  },
+  {
+   "name": "calf_R",
+   "parent": "thigh_R",
+   "head": [
+    -0.1533,
+    0.00052,
+    0.53242
+   ],
+   "tail": [
+    -0.19112,
+    0.02775,
+    0.10398
+   ],
+   "rest_length": 0.43097,
+   "depth": 3,
+   "deform": true
+  },
+  {
+   "name": "foot_R",
+   "parent": "calf_R",
+   "head": [
+    -0.19112,
+    0.02775,
+    0.10398
+   ],
+   "tail": [
+    -0.20129,
+    -0.11806,
+    0.02235
+   ],
+   "rest_length": 0.16741,
+   "depth": 4,
+   "deform": true
+  },
+  {
+   "name": "toes_R",
+   "parent": "foot_R",
+   "head": [
+    -0.20129,
+    -0.11806,
+    0.02235
+   ],
+   "tail": [
+    -0.20887,
+    -0.1709,
+    0.01712
+   ],
+   "rest_length": 0.05364,
+   "depth": 5,
+   "deform": true
+  },
+  {
+   "name": "calf_twist_R",
+   "parent": "calf_R",
+   "head": [
+    -0.1533,
+    0.00052,
+    0.53242
+   ],
+   "tail": [
+    -0.16585,
+    0.00956,
+    0.39025
+   ],
+   "rest_length": 0.143,
+   "depth": 4,
+   "deform": true
+  },
+  {
+   "name": "thigh_twist_R",
+   "parent": "thigh_R",
+   "head": [
+    -0.11647,
+    -0.00712,
+    0.99023
+   ],
+   "tail": [
+    -0.13052,
+    -0.00421,
+    0.81556
+   ],
+   "rest_length": 0.17525,
+   "depth": 3,
+   "deform": true
+  },
+  {
+   "name": "thigh_L",
+   "parent": "pelvis",
+   "head": [
+    0.11647,
+    -0.00712,
+    0.99023
+   ],
+   "tail": [
+    0.1533,
+    0.00052,
+    0.53242
+   ],
+   "rest_length": 0.45936,
+   "depth": 2,
+   "deform": true
+  },
+  {
+   "name": "calf_L",
+   "parent": "thigh_L",
+   "head": [
+    0.1533,
+    0.00052,
+    0.53242
+   ],
+   "tail": [
+    0.19112,
+    0.02775,
+    0.10398
+   ],
+   "rest_length": 0.43097,
+   "depth": 3,
+   "deform": true
+  },
+  {
+   "name": "foot_L",
+   "parent": "calf_L",
+   "head": [
+    0.19112,
+    0.02775,
+    0.10398
+   ],
+   "tail": [
+    0.20129,
+    -0.11806,
+    0.02235
+   ],
+   "rest_length": 0.16741,
+   "depth": 4,
+   "deform": true
+  },
+  {
+   "name": "toes_L",
+   "parent": "foot_L",
+   "head": [
+    0.20129,
+    -0.11806,
+    0.02235
+   ],
+   "tail": [
+    0.20887,
+    -0.1709,
+    0.01712
+   ],
+   "rest_length": 0.05364,
+   "depth": 5,
+   "deform": true
+  },
+  {
+   "name": "calf_twist_L",
+   "parent": "calf_L",
+   "head": [
+    0.1533,
+    0.00052,
+    0.53242
+   ],
+   "tail": [
+    0.16585,
+    0.00956,
+    0.39025
+   ],
+   "rest_length": 0.143,
+   "depth": 4,
+   "deform": true
+  },
+  {
+   "name": "thigh_twist_L",
+   "parent": "thigh_L",
+   "head": [
+    0.11647,
+    -0.00712,
+    0.99023
+   ],
+   "tail": [
+    0.13052,
+    -0.00421,
+    0.81556
+   ],
+   "rest_length": 0.17525,
+   "depth": 3,
+   "deform": true
+  },
+  {
+   "name": "spine01",
+   "parent": "pelvis",
+   "head": [
+    -0.0,
+    0.01573,
+    1.09177
+   ],
+   "tail": [
+    -0.0,
+    0.01304,
+    1.17138
+   ],
+   "rest_length": 0.07965,
+   "depth": 2,
+   "deform": true
+  },
+  {
+   "name": "spine02",
+   "parent": "spine01",
+   "head": [
+    -0.0,
+    0.01304,
+    1.17138
+   ],
+   "tail": [
+    -0.0,
+    0.05546,
+    1.3101
+   ],
+   "rest_length": 0.14507,
+   "depth": 3,
+   "deform": true
+  },
+  {
+   "name": "spine03",
+   "parent": "spine02",
+   "head": [
+    -0.0,
+    0.05546,
+    1.3101
+   ],
+   "tail": [
+    0.0,
+    0.05553,
+    1.45461
+   ],
+   "rest_length": 0.14451,
+   "depth": 4,
+   "deform": true
+  },
+  {
+   "name": "clavicle_L",
+   "parent": "spine03",
+   "head": [
+    0.03784,
+    0.01708,
+    1.51071
+   ],
+   "tail": [
+    0.1817,
+    0.01015,
+    1.47814
+   ],
+   "rest_length": 0.14766,
+   "depth": 5,
+   "deform": true
+  },
+  {
+   "name": "upperarm_L",
+   "parent": "clavicle_L",
+   "head": [
+    0.18121,
+    0.01018,
+    1.47853
+   ],
+   "tail": [
+    0.40504,
+    0.01681,
+    1.33679
+   ],
+   "rest_length": 0.26502,
+   "depth": 6,
+   "deform": true
+  },
+  {
+   "name": "lowerarm_L",
+   "parent": "upperarm_L",
+   "head": [
+    0.40504,
+    0.01681,
+    1.33679
+   ],
+   "tail": [
+    0.65035,
+    -0.03044,
+    1.21175
+   ],
+   "rest_length": 0.27937,
+   "depth": 7,
+   "deform": true
+  },
+  {
+   "name": "hand_L",
+   "parent": "lowerarm_L",
+   "head": [
+    0.65035,
+    -0.03044,
+    1.21175
+   ],
+   "tail": [
+    0.68105,
+    -0.03628,
+    1.19024
+   ],
+   "rest_length": 0.03793,
+   "depth": 8,
+   "deform": true
+  },
+  {
+   "name": "thumb01_L",
+   "parent": "hand_L",
+   "head": [
+    0.66632,
+    -0.05943,
+    1.19393
+   ],
+   "tail": [
+    0.66317,
+    -0.08974,
+    1.17604
+   ],
+   "rest_length": 0.03533,
+   "depth": 9,
+   "deform": true
+  },
+  {
+   "name": "thumb02_L",
+   "parent": "thumb01_L",
+   "head": [
+    0.66317,
+    -0.08974,
+    1.17604
+   ],
+   "tail": [
+    0.67188,
+    -0.12408,
+    1.1612
+   ],
+   "rest_length": 0.03842,
+   "depth": 10,
+   "deform": true
+  },
+  {
+   "name": "thumb03_L",
+   "parent": "thumb02_L",
+   "head": [
+    0.67188,
+    -0.12408,
+    1.1612
+   ],
+   "tail": [
+    0.68361,
+    -0.14376,
+    1.13685
+   ],
+   "rest_length": 0.03343,
+   "depth": 11,
+   "deform": true
+  },
+  {
+   "name": "index00_L",
+   "parent": "hand_L",
+   "head": [
+    0.66769,
+    -0.06434,
+    1.18656
+   ],
+   "tail": [
+    0.72469,
+    -0.07546,
+    1.16549
+   ],
+   "rest_length": 0.06177,
+   "depth": 9,
+   "deform": true
+  },
+  {
+   "name": "index01_L",
+   "parent": "index00_L",
+   "head": [
+    0.72469,
+    -0.07546,
+    1.16549
+   ],
+   "tail": [
+    0.74811,
+    -0.07862,
+    1.1334
+   ],
+   "rest_length": 0.03985,
+   "depth": 10,
+   "deform": true
+  },
+  {
+   "name": "index02_L",
+   "parent": "index01_L",
+   "head": [
+    0.74811,
+    -0.07862,
+    1.1334
+   ],
+   "tail": [
+    0.76641,
+    -0.07909,
+    1.11608
+   ],
+   "rest_length": 0.0252,
+   "depth": 11,
+   "deform": true
+  },
+  {
+   "name": "index03_L",
+   "parent": "index02_L",
+   "head": [
+    0.76641,
+    -0.07909,
+    1.11608
+   ],
+   "tail": [
+    0.7788,
+    -0.07814,
+    1.09694
+   ],
+   "rest_length": 0.02283,
+   "depth": 12,
+   "deform": true
+  },
+  {
+   "name": "middle00_L",
+   "parent": "hand_L",
+   "head": [
+    0.67217,
+    -0.05077,
+    1.19029
+   ],
+   "tail": [
+    0.72637,
+    -0.05293,
+    1.16623
+   ],
+   "rest_length": 0.05934,
+   "depth": 9,
+   "deform": true
+  },
+  {
+   "name": "middle01_L",
+   "parent": "middle00_L",
+   "head": [
+    0.72637,
+    -0.05293,
+    1.16623
+   ],
+   "tail": [
+    0.75198,
+    -0.05627,
+    1.13084
+   ],
+   "rest_length": 0.04381,
+   "depth": 10,
+   "deform": true
+  },
+  {
+   "name": "middle02_L",
+   "parent": "middle01_L",
+   "head": [
+    0.75198,
+    -0.05627,
+    1.13084
+   ],
+   "tail": [
+    0.77315,
+    -0.05802,
+    1.11011
+   ],
+   "rest_length": 0.02968,
+   "depth": 11,
+   "deform": true
+  },
+  {
+   "name": "middle03_L",
+   "parent": "middle02_L",
+   "head": [
+    0.77315,
+    -0.05802,
+    1.11011
+   ],
+   "tail": [
+    0.7883,
+    -0.05885,
+    1.08905
+   ],
+   "rest_length": 0.02596,
+   "depth": 12,
+   "deform": true
+  },
+  {
+   "name": "ring00_L",
+   "parent": "hand_L",
+   "head": [
+    0.67602,
+    -0.03142,
+    1.19108
+   ],
+   "tail": [
+    0.72267,
+    -0.03193,
+    1.16602
+   ],
+   "rest_length": 0.05296,
+   "depth": 9,
+   "deform": true
+  },
+  {
+   "name": "ring01_L",
+   "parent": "ring00_L",
+   "head": [
+    0.72267,
+    -0.03193,
+    1.16602
+   ],
+   "tail": [
+    0.74991,
+    -0.03332,
+    1.13293
+   ],
+   "rest_length": 0.04288,
+   "depth": 10,
+   "deform": true
+  },
+  {
+   "name": "ring02_L",
+   "parent": "ring01_L",
+   "head": [
+    0.74991,
+    -0.03332,
+    1.13293
+   ],
+   "tail": [
+    0.77048,
+    -0.03538,
+    1.11365
+   ],
+   "rest_length": 0.02827,
+   "depth": 11,
+   "deform": true
+  },
+  {
+   "name": "ring03_L",
+   "parent": "ring02_L",
+   "head": [
+    0.77048,
+    -0.03538,
+    1.11365
+   ],
+   "tail": [
+    0.7843,
+    -0.03712,
+    1.09437
+   ],
+   "rest_length": 0.02378,
+   "depth": 12,
+   "deform": true
+  },
+  {
+   "name": "pinky00_L",
+   "parent": "hand_L",
+   "head": [
+    0.67576,
+    -0.0109,
+    1.1898
+   ],
+   "tail": [
+    0.71542,
+    -0.01218,
+    1.16288
+   ],
+   "rest_length": 0.04795,
+   "depth": 9,
+   "deform": true
+  },
+  {
+   "name": "pinky01_L",
+   "parent": "pinky00_L",
+   "head": [
+    0.71542,
+    -0.01218,
+    1.16288
+   ],
+   "tail": [
+    0.7384,
+    -0.01355,
+    1.13632
+   ],
+   "rest_length": 0.03515,
+   "depth": 10,
+   "deform": true
+  },
+  {
+   "name": "pinky02_L",
+   "parent": "pinky01_L",
+   "head": [
+    0.7384,
+    -0.01355,
+    1.13632
+   ],
+   "tail": [
+    0.75316,
+    -0.01507,
+    1.12287
+   ],
+   "rest_length": 0.02003,
+   "depth": 11,
+   "deform": true
+  },
+  {
+   "name": "pinky03_L",
+   "parent": "pinky02_L",
+   "head": [
+    0.75316,
+    -0.01507,
+    1.12287
+   ],
+   "tail": [
+    0.76229,
+    -0.01689,
+    1.10886
+   ],
+   "rest_length": 0.01682,
+   "depth": 12,
+   "deform": true
+  },
+  {
+   "name": "lowerarm_twist_L",
+   "parent": "lowerarm_L",
+   "head": [
+    0.40504,
+    0.01681,
+    1.33679
+   ],
+   "tail": [
+    0.52842,
+    -0.00695,
+    1.2739
+   ],
+   "rest_length": 0.14051,
+   "depth": 8,
+   "deform": true
+  },
+  {
+   "name": "upperarm_twist_L",
+   "parent": "upperarm_L",
+   "head": [
+    0.18121,
+    0.01018,
+    1.47853
+   ],
+   "tail": [
+    0.28979,
+    0.0134,
+    1.40977
+   ],
+   "rest_length": 0.12856,
+   "depth": 7,
+   "deform": true
+  },
+  {
+   "name": "clavicle_R",
+   "parent": "spine03",
+   "head": [
+    -0.03784,
+    0.01708,
+    1.51071
+   ],
+   "tail": [
+    -0.1817,
+    0.01015,
+    1.47814
+   ],
+   "rest_length": 0.14766,
+   "depth": 5,
+   "deform": true
+  },
+  {
+   "name": "upperarm_R",
+   "parent": "clavicle_R",
+   "head": [
+    -0.18121,
+    0.01018,
+    1.47853
+   ],
+   "tail": [
+    -0.40504,
+    0.01681,
+    1.33679
+   ],
+   "rest_length": 0.26502,
+   "depth": 6,
+   "deform": true
+  },
+  {
+   "name": "lowerarm_R",
+   "parent": "upperarm_R",
+   "head": [
+    -0.40504,
+    0.01681,
+    1.33679
+   ],
+   "tail": [
+    -0.65035,
+    -0.03044,
+    1.21175
+   ],
+   "rest_length": 0.27937,
+   "depth": 7,
+   "deform": true
+  },
+  {
+   "name": "hand_R",
+   "parent": "lowerarm_R",
+   "head": [
+    -0.65035,
+    -0.03044,
+    1.21175
+   ],
+   "tail": [
+    -0.68105,
+    -0.03628,
+    1.19024
+   ],
+   "rest_length": 0.03793,
+   "depth": 8,
+   "deform": true
+  },
+  {
+   "name": "thumb01_R",
+   "parent": "hand_R",
+   "head": [
+    -0.66632,
+    -0.05943,
+    1.19393
+   ],
+   "tail": [
+    -0.66317,
+    -0.08974,
+    1.17604
+   ],
+   "rest_length": 0.03533,
+   "depth": 9,
+   "deform": true
+  },
+  {
+   "name": "thumb02_R",
+   "parent": "thumb01_R",
+   "head": [
+    -0.66317,
+    -0.08974,
+    1.17604
+   ],
+   "tail": [
+    -0.67188,
+    -0.12408,
+    1.1612
+   ],
+   "rest_length": 0.03842,
+   "depth": 10,
+   "deform": true
+  },
+  {
+   "name": "thumb03_R",
+   "parent": "thumb02_R",
+   "head": [
+    -0.67188,
+    -0.12408,
+    1.1612
+   ],
+   "tail": [
+    -0.68361,
+    -0.14376,
+    1.13685
+   ],
+   "rest_length": 0.03343,
+   "depth": 11,
+   "deform": true
+  },
+  {
+   "name": "index00_R",
+   "parent": "hand_R",
+   "head": [
+    -0.66769,
+    -0.06434,
+    1.18656
+   ],
+   "tail": [
+    -0.72469,
+    -0.07546,
+    1.16549
+   ],
+   "rest_length": 0.06177,
+   "depth": 9,
+   "deform": true
+  },
+  {
+   "name": "index01_R",
+   "parent": "index00_R",
+   "head": [
+    -0.72469,
+    -0.07546,
+    1.16549
+   ],
+   "tail": [
+    -0.74811,
+    -0.07862,
+    1.1334
+   ],
+   "rest_length": 0.03985,
+   "depth": 10,
+   "deform": true
+  },
+  {
+   "name": "index02_R",
+   "parent": "index01_R",
+   "head": [
+    -0.74811,
+    -0.07862,
+    1.1334
+   ],
+   "tail": [
+    -0.76641,
+    -0.07909,
+    1.11608
+   ],
+   "rest_length": 0.0252,
+   "depth": 11,
+   "deform": true
+  },
+  {
+   "name": "index03_R",
+   "parent": "index02_R",
+   "head": [
+    -0.76641,
+    -0.07909,
+    1.11608
+   ],
+   "tail": [
+    -0.7788,
+    -0.07814,
+    1.09694
+   ],
+   "rest_length": 0.02283,
+   "depth": 12,
+   "deform": true
+  },
+  {
+   "name": "middle00_R",
+   "parent": "hand_R",
+   "head": [
+    -0.67217,
+    -0.05077,
+    1.19029
+   ],
+   "tail": [
+    -0.72637,
+    -0.05293,
+    1.16623
+   ],
+   "rest_length": 0.05934,
+   "depth": 9,
+   "deform": true
+  },
+  {
+   "name": "middle01_R",
+   "parent": "middle00_R",
+   "head": [
+    -0.72637,
+    -0.05293,
+    1.16623
+   ],
+   "tail": [
+    -0.75198,
+    -0.05627,
+    1.13084
+   ],
+   "rest_length": 0.04381,
+   "depth": 10,
+   "deform": true
+  },
+  {
+   "name": "middle02_R",
+   "parent": "middle01_R",
+   "head": [
+    -0.75198,
+    -0.05627,
+    1.13084
+   ],
+   "tail": [
+    -0.77315,
+    -0.05802,
+    1.11011
+   ],
+   "rest_length": 0.02968,
+   "depth": 11,
+   "deform": true
+  },
+  {
+   "name": "middle03_R",
+   "parent": "middle02_R",
+   "head": [
+    -0.77315,
+    -0.05802,
+    1.11011
+   ],
+   "tail": [
+    -0.7883,
+    -0.05885,
+    1.08905
+   ],
+   "rest_length": 0.02596,
+   "depth": 12,
+   "deform": true
+  },
+  {
+   "name": "ring00_R",
+   "parent": "hand_R",
+   "head": [
+    -0.67602,
+    -0.03142,
+    1.19108
+   ],
+   "tail": [
+    -0.72267,
+    -0.03193,
+    1.16602
+   ],
+   "rest_length": 0.05296,
+   "depth": 9,
+   "deform": true
+  },
+  {
+   "name": "ring01_R",
+   "parent": "ring00_R",
+   "head": [
+    -0.72267,
+    -0.03193,
+    1.16602
+   ],
+   "tail": [
+    -0.74991,
+    -0.03332,
+    1.13293
+   ],
+   "rest_length": 0.04288,
+   "depth": 10,
+   "deform": true
+  },
+  {
+   "name": "ring02_R",
+   "parent": "ring01_R",
+   "head": [
+    -0.74991,
+    -0.03332,
+    1.13293
+   ],
+   "tail": [
+    -0.77048,
+    -0.03538,
+    1.11365
+   ],
+   "rest_length": 0.02827,
+   "depth": 11,
+   "deform": true
+  },
+  {
+   "name": "ring03_R",
+   "parent": "ring02_R",
+   "head": [
+    -0.77048,
+    -0.03538,
+    1.11365
+   ],
+   "tail": [
+    -0.7843,
+    -0.03712,
+    1.09437
+   ],
+   "rest_length": 0.02378,
+   "depth": 12,
+   "deform": true
+  },
+  {
+   "name": "pinky00_R",
+   "parent": "hand_R",
+   "head": [
+    -0.67576,
+    -0.0109,
+    1.1898
+   ],
+   "tail": [
+    -0.71542,
+    -0.01218,
+    1.16288
+   ],
+   "rest_length": 0.04795,
+   "depth": 9,
+   "deform": true
+  },
+  {
+   "name": "pinky01_R",
+   "parent": "pinky00_R",
+   "head": [
+    -0.71542,
+    -0.01218,
+    1.16288
+   ],
+   "tail": [
+    -0.7384,
+    -0.01355,
+    1.13632
+   ],
+   "rest_length": 0.03515,
+   "depth": 10,
+   "deform": true
+  },
+  {
+   "name": "pinky02_R",
+   "parent": "pinky01_R",
+   "head": [
+    -0.7384,
+    -0.01355,
+    1.13632
+   ],
+   "tail": [
+    -0.75316,
+    -0.01507,
+    1.12287
+   ],
+   "rest_length": 0.02003,
+   "depth": 11,
+   "deform": true
+  },
+  {
+   "name": "pinky03_R",
+   "parent": "pinky02_R",
+   "head": [
+    -0.75316,
+    -0.01507,
+    1.12287
+   ],
+   "tail": [
+    -0.76229,
+    -0.01689,
+    1.10886
+   ],
+   "rest_length": 0.01682,
+   "depth": 12,
+   "deform": true
+  },
+  {
+   "name": "lowerarm_twist_R",
+   "parent": "lowerarm_R",
+   "head": [
+    -0.40504,
+    0.01681,
+    1.33679
+   ],
+   "tail": [
+    -0.52842,
+    -0.00695,
+    1.2739
+   ],
+   "rest_length": 0.14051,
+   "depth": 8,
+   "deform": true
+  },
+  {
+   "name": "upperarm_twist_R",
+   "parent": "upperarm_R",
+   "head": [
+    -0.18121,
+    0.01018,
+    1.47853
+   ],
+   "tail": [
+    -0.28979,
+    0.0134,
+    1.40977
+   ],
+   "rest_length": 0.12856,
+   "depth": 7,
+   "deform": true
+  },
+  {
+   "name": "neck",
+   "parent": "spine03",
+   "head": [
+    -0.0,
+    0.00756,
+    1.55801
+   ],
+   "tail": [
+    -0.0,
+    -0.05393,
+    1.65186
+   ],
+   "rest_length": 0.1122,
+   "depth": 5,
+   "deform": true
+  },
+  {
+   "name": "head",
+   "parent": "neck",
+   "head": [
+    -0.0,
+    -0.05393,
+    1.65186
+   ],
+   "tail": [
+    0.0,
+    -0.06262,
+    1.82834
+   ],
+   "rest_length": 0.17669,
+   "depth": 6,
+   "deform": true
+  },
+  {
+   "name": "breast_L",
+   "parent": "spine03",
+   "head": [
+    0.09019,
+    0.03759,
+    1.35916
+   ],
+   "tail": [
+    0.07347,
+    -0.14858,
+    1.34963
+   ],
+   "rest_length": 0.18716,
+   "depth": 5,
+   "deform": true
+  },
+  {
+   "name": "breast_R",
+   "parent": "spine03",
+   "head": [
+    -0.09019,
+    0.03759,
+    1.35916
+   ],
+   "tail": [
+    -0.07347,
+    -0.14858,
+    1.34963
+   ],
+   "rest_length": 0.18716,
+   "depth": 5,
+   "deform": true
+  }
+ ]
+}

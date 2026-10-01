@@ -14,12 +14,15 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import bpy  # noqa: E402
 import numpy as np  # noqa: E402
+
 from _common import find_character_armature, script_args  # noqa: E402
 
 args = script_args(("--out", dict(required=True)))
 arm = find_character_armature()
 scn = bpy.context.scene
-for ob in bpy.data.objects:  # skip skinning the 18k-vertex mesh: only the armature matters here (70 s -> seconds)
+for (
+    ob
+) in bpy.data.objects:  # skip skinning the 18k-vertex mesh: only the armature matters here (70 s -> seconds)
     if ob.type == "MESH":
         ob.hide_viewport = True
 bones = sorted(arm.data.bones, key=lambda b: len(b.parent_recursive))

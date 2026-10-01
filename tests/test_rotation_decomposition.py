@@ -41,7 +41,9 @@ def test_tracked_decomposition_is_continuous_through_gimbal(robot):
     axes = robot.chains["left_arm"].axes[:3]
     lim = robot.chains["left_arm"].limits_deg[:3]
     t = np.linspace(0, 1, 200)
-    q = np.column_stack([np.deg2rad(60 * np.sin(2 * np.pi * t)), np.deg2rad(90 * np.ones(200)), np.deg2rad(30 * t)])
+    q = np.column_stack(
+        [np.deg2rad(60 * np.sin(2 * np.pi * t)), np.deg2rad(90 * np.ones(200)), np.deg2rad(30 * t)]
+    )
     got = decompose_tracked(compose(axes, q), axes, lim)
     assert np.abs(np.diff(got, axis=0)).max() < np.deg2rad(20)  # no 180 deg flips
     np.testing.assert_allclose(compose(axes, got), compose(axes, q), atol=1e-9)

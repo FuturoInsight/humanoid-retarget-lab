@@ -21,7 +21,9 @@ class BoneData:
     rest_head: np.ndarray  # (B, 3)
     rest_tail: np.ndarray  # (B, 3)
     rest_rot: np.ndarray  # (B, 3, 3)
-    ref_rot: np.ndarray  # (B, 3, 3) T-pose reference orientation used by the retarget (rest for unmapped bones)
+    ref_rot: (
+        np.ndarray
+    )  # (B, 3, 3) T-pose reference orientation used by the retarget (rest for unmapped bones)
 
     @property
     def n_frames(self) -> int:
@@ -49,7 +51,11 @@ def bones_npz_to_parquet(npz_path: str | Path, out_path: str | Path) -> None:
     flat = d["rot"].reshape(n_f * n_b, 9)
     for k in range(9):
         rows[f"r{k // 3}{k % 3}"] = flat[:, k]
-    rest = {"frame": np.full(n_b, -1), "bone": names, "parent": [names[p] if p >= 0 else "" for p in d["parents"]]}
+    rest = {
+        "frame": np.full(n_b, -1),
+        "bone": names,
+        "parent": [names[p] if p >= 0 else "" for p in d["parents"]],
+    }
     for i, ax in enumerate("xyz"):
         rest[f"h{ax}"] = d["rest_head"][:, i]
         rest[f"t{ax}"] = d["rest_tail"][:, i]

@@ -33,3 +33,4 @@ src = ["src", "tests", "scripts"]
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "B"]
+ignore = ["E501"]  # prose lines in docstrings/comments; code is wrapped by `ruff format`

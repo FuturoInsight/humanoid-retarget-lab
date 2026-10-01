@@ -1,0 +1,42 @@
+# Default run configuration. Paths are relative to the repo root.
+run_id: sample
+
+blender:
+  exe: tools/blender/blender.exe        # portable Blender 4.0.2, see README
+  user_scripts: tools/blender_user      # holds the pinned MB-Lab 1.8.1 add-on (addons/mblab)
+  version: "4.0.2"
+  mblab_version: "1.8.1"
+
+character:
+  mblab_character: m_ca01               # MB-Lab character id (male, caucasian base)
+  blend: assets/mblab_character.blend
+
+robot_config: config/robot_skeleton.yaml
+bone_map: config/bone_map_cmu_to_mblab.yaml
+thresholds: config/thresholds.yaml
+
+fps: 30                                 # CMU data is 120 Hz; clips are decimated to this rate
+retarget_method: ik_refined             # joint_angle | ik_refined -> the method used for trajectories/checks
+workspace_samples: 300000
+
+render:
+  width: 420                            # per panel; three panels are stitched side by side
+  height: 540
+  step: 2                               # render every 2nd frame (30 fps data -> 15 fps video)
+  samples: 12
+
+# CMU Graphics Lab Motion Capture Database, BVH conversion by B. Hahne (see data/SOURCES.md).
+# start_sec / max_sec select a window; frames are decimated to `fps`.
+clips:
+  - {id: cmu_69_72, bvh: data/raw/69_72.bvh, task: "walk up to an object, pick it up, set it down elsewhere", kind: pick_place}
+  - {id: cmu_69_73, bvh: data/raw/69_73.bvh, task: "walk up, lean over, pick up an object, set it down elsewhere", kind: bend_pick}
+  - {id: cmu_69_70, bvh: data/raw/69_70.bvh, task: "walk up, squat, pick up an object, set it down elsewhere", kind: squat_pick}
+  - {id: cmu_69_69, bvh: data/raw/69_69.bvh, task: "walk forward, pick up an object, carry it back", kind: carry}
+  - {id: cmu_70_01, bvh: data/raw/70_01.bvh, task: "carry a 5.5 lb suitcase (walking)", kind: carry}
+  - {id: cmu_26_09, bvh: data/raw/26_09.bvh, task: "bend over and pick up", kind: bend_pick}
+  - {id: cmu_62_20, bvh: data/raw/62_20.bvh, task: "close, move and open a box", kind: manipulation}
+  - {id: cmu_15_06, bvh: data/raw/15_06.bvh, task: "lean forward and reach for something", kind: reach, start_sec: 2.0}
+  - {id: cmu_14_07, bvh: data/raw/14_07.bvh, task: "jump up to grab, reach, tiptoe (overhead reach)", kind: overhead_reach}
+  - {id: cmu_14_01, bvh: data/raw/14_01.bvh, task: "boxing (fast, messy)", kind: messy, start_sec: 6.0}
+  - {id: cmu_56_02, bvh: data/raw/56_02.bvh, task: "vignettes: wipe window, stretch, grab, smash (messy)", kind: messy, start_sec: 3.0}
+max_sec: 10.0

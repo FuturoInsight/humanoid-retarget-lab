@@ -34,8 +34,8 @@ chains:
     joints:
       - {name: waist_yaw,   axis: [0, 0, 1], limits_deg: [-60, 60], max_vel_dps: 120, offset_after: [0, 0, 0]}
       # +y rotation tips +z toward +x, i.e. positive pitch = leaning forward.
-      # Forward limit 60 deg (not the ~90 a human bends) so deep bends show up as violations.
-      - {name: waist_pitch, axis: [0, 1, 0], limits_deg: [-25, 60], max_vel_dps: 90,  offset_after: [0, 0, 0]}
+      # Forward limit 75 deg (a human bends ~90-100), so deep floor picks still show up as violations.
+      - {name: waist_pitch, axis: [0, 1, 0], limits_deg: [-25, 75], max_vel_dps: 120,  offset_after: [0, 0, 0]}
   head:
     parent: torso
     origin: [0.0, 0.0, 0.50]

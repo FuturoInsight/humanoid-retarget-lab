@@ -25,9 +25,9 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import bpy  # noqa: E402
 import numpy as np  # noqa: E402
-from _common import find_character_armature, script_args  # noqa: E402
 from mathutils import Matrix  # noqa: E402
 
+from _common import find_character_armature, script_args  # noqa: E402
 from retarget_lab.bvh import forward_kinematics, parse_bvh, to_blender_space  # noqa: E402
 
 args = script_args(
@@ -63,7 +63,9 @@ with open(args.bone_map) as fh:
     bone_map = json.load(fh)
 bvh = parse_bvh(args.bvh)
 arm = find_character_armature()
-assert np.allclose(np.array(arm.matrix_world), np.eye(4), atol=1e-6), "armature object transform must be identity"
+assert np.allclose(np.array(arm.matrix_world), np.eye(4), atol=1e-6), (
+    "armature object transform must be identity"
+)
 
 # ---- frame selection (decimate 120 Hz -> target fps); frame 0 is the BVH's T-pose reference frame
 stride = max(1, int(round(bvh.fps / args.fps)))
@@ -90,7 +92,8 @@ rest_local = {n: (np.linalg.inv(rest[parent[n]]) @ rest[n] if parent[n] else res
 # ---- scale: leg-length ratio (hip joint -> ankle joint along the chain)
 src_leg = np.mean(
     [
-        np.linalg.norm(p0[j(f"{s}UpLeg")] - p0[j(f"{s}Leg")]) + np.linalg.norm(p0[j(f"{s}Leg")] - p0[j(f"{s}Foot")])
+        np.linalg.norm(p0[j(f"{s}UpLeg")] - p0[j(f"{s}Leg")])
+        + np.linalg.norm(p0[j(f"{s}Leg")] - p0[j(f"{s}Foot")])
         for s in ("Left", "Right")
     ]
 )

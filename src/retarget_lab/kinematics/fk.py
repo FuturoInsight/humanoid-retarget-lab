@@ -138,6 +138,40 @@ def _euler_first_frame(r0: np.ndarray, axes: np.ndarray, lim: np.ndarray | None)
     return cands[int(np.argmin(score))]
 
 
+def _gauss_newton(target: np.ndarray, axes: np.ndarray, q: np.ndarray, iters: int, damping: float):
+    k = len(axes)
+    for _ in range(iters):
+        cur = np.eye(3)
+        cols = []
+        for i in range(k):
+            cols.append(cur @ axes[i])
+            cur = cur @ axis_rot(axes[i], q[i])
+        err = Rotation.from_matrix(target @ cur.T).as_rotvec()
+        j = np.stack(cols, axis=1)
+        dq = np.linalg.solve(j.T @ j + damping**2 * np.eye(k), j.T @ err)
+        q = q + dq * min(1.0, 0.5 / max(np.linalg.norm(dq), 1e-12))
+        if np.linalg.norm(dq) < 1e-9:
+            break
+    cur = compose(axes, q[None])[0]
+    return q, float(np.linalg.norm(Rotation.from_matrix(target @ cur.T).as_rotvec()))
+
+
+def _fit_first_frame(target: np.ndarray, axes: np.ndarray, damping: float) -> np.ndarray:
+    """Least-squares fit of the first frame from several starts; ties go to the smallest angles.
+
+    A 1-2 axis fit of a rotation with unrealisable components has local minima (e.g. a wrist yaw 180 deg off); later
+    frames inherit the first frame's branch through tracking, so it has to be the right one.
+    """
+    k = len(axes)
+    starts = [np.zeros(k)] + [
+        np.array(c) * np.pi / 2 for c in np.ndindex(*(3,) * k) for c in [[v - 1 for v in c]]
+    ]
+    sols = [_gauss_newton(target, axes, q0.copy(), 80, damping) for q0 in starts]
+    best = min(res for _, res in sols)
+    near = [(np.abs(wrap_pi(q)).sum(), wrap_pi(q)) for q, res in sols if res < best + 0.03]
+    return min(near, key=lambda x: x[0])[1]
+
+
 def decompose_tracked(
     r: np.ndarray,
     axes: np.ndarray,
@@ -166,8 +200,11 @@ def decompose_tracked(
     for t in range(n):
         if t == 0 and exact:
             continue
-        q = out[t - 1].copy() if t > 0 else np.zeros(k)
-        n_it = iters if t > 0 else 60
+        if t == 0:
+            out[0] = _fit_first_frame(r[0], axes, damping)
+            continue
+        q = out[t - 1].copy()
+        n_it = iters
         ok = False
         for _ in range(n_it):
             cur = np.eye(3)
@@ -192,7 +229,9 @@ def decompose_tracked(
     return _canonical_branch(out, axes, lim) if exact else out
 
 
-def _canonical_branch(q: np.ndarray, axes: np.ndarray, lim: np.ndarray | None, margin_deg: float = 30.0) -> np.ndarray:
+def _canonical_branch(
+    q: np.ndarray, axes: np.ndarray, lim: np.ndarray | None, margin_deg: float = 30.0
+) -> np.ndarray:
     """Wrap angles to (-pi, pi] and move frames that wound onto the alternate Euler branch back.
 
     Gauss-Newton tracking is continuous but can run through the singularity onto the alternate branch
@@ -204,7 +243,9 @@ def _canonical_branch(q: np.ndarray, axes: np.ndarray, lim: np.ndarray | None, m
         return wrap_pi(q)
     _, signs = _letters(axes)
     cur = wrap_pi(q)
-    alt = wrap_pi(np.stack([q[:, 0] + signs[0] * np.pi, signs[1] * np.pi - q[:, 1], q[:, 2] + signs[2] * np.pi], axis=1))
+    alt = wrap_pi(
+        np.stack([q[:, 0] + signs[0] * np.pi, signs[1] * np.pi - q[:, 1], q[:, 2] + signs[2] * np.pi], axis=1)
+    )
 
     def excess(a):
         return (np.maximum(lim[:, 0] - a, 0) + np.maximum(a - lim[:, 1], 0)).sum(axis=1)

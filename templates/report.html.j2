@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Retargeting Quality Report</title>
+<style>
+  :root { --bg:#fff; --fg:#1f2933; --muted:#5f6b7a; --line:#d9dee4; --card:#f5f7f9; --ok:#2e9b5f; --warn:#c98a00; --fail:#ff5c00; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#14181d; --fg:#e6eaee; --muted:#9aa5b1; --line:#2b323a; --card:#1b2026; --warn:#e8b03a; } }
+  body { background:var(--bg); color:var(--fg); font:15px/1.55 system-ui, "Segoe UI", sans-serif; margin:0; }
+  main { max-width:1080px; margin:0 auto; padding:24px 16px 80px; }
+  h1 { font-size:26px; margin:0 0 4px; } h2 { font-size:20px; margin:44px 0 10px; border-bottom:1px solid var(--line); padding-bottom:6px; }
+  h3 { font-size:15px; margin:22px 0 6px; } p.sub { color:var(--muted); margin:0 0 18px; }
+  .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:10px; margin:14px 0; }
+  .kpi { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:10px 14px; }
+  .kpi b { display:block; font-size:24px; } .kpi span { color:var(--muted); font-size:12.5px; }
+  table { border-collapse:collapse; width:100%; font-size:13px; margin:8px 0 14px; }
+  th, td { border-bottom:1px solid var(--line); padding:5px 8px; text-align:left; vertical-align:top; }
+  th { color:var(--muted); font-weight:600; } td.n { text-align:right; font-variant-numeric:tabular-nums; }
+  .tag { display:inline-block; padding:1px 8px; border-radius:10px; font-size:12px; font-weight:600; border:1.5px solid; white-space:nowrap; }
+  .tag.ok { color:var(--ok); border-color:var(--ok); } .tag.warn { color:var(--warn); border-color:var(--warn); } .tag.fail { color:var(--fail); border-color:var(--fail); }
+  img { max-width:100%; height:auto; border-radius:6px; background:#fff; } .scroll { overflow-x:auto; background:#fff; border:1px solid var(--line); border-radius:6px; padding:6px; }
+  .scroll svg { max-width:none; } code { background:var(--card); padding:1px 5px; border-radius:4px; font-size:13px; }
+  ol.take li { margin:0 0 10px; } .clip { margin:26px 0; } .reasons { color:var(--muted); font-size:12.5px; margin:2px 0 8px; }
+  details { margin:8px 0; } summary { cursor:pointer; font-weight:600; }
+</style>
+</head>
+<body><main>
+<h1>Retargeting Quality Report</h1>
+<p class="sub">Run <code>{{ run_id }}</code> · CMU mocap → MB-Lab character → generic robot skeleton <code>{{ robot.name }}</code> ({{ robot.joint_names|length }} DoF, <b>not any real robot</b>) · method: <code>{{ method }}</code> · {{ fps }} Hz</p>
+
+<h2>1. Summary</h2>
+<div class="kpis">
+  <div class="kpi"><b>{{ n_clips }}</b><span>clips retargeted</span></div>
+  <div class="kpi"><b>{{ n_frames }}</b><span>frames analysed</span></div>
+  <div class="kpi"><b>{{ '%.0f'|format(feasible_share*100) }}%</b><span>frames executable as demonstrated</span></div>
+  {% for v in ['USABLE','USABLE WITH CLAMPING','NOT FEASIBLE'] %}
+  <div class="kpi"><b>{{ verdict_counts.get(v,0) }}</b><span>{{ v|lower }}</span></div>
+  {% endfor %}
+</div>
+<h3>Top violating joints (share of all frames past the position limit)</h3>
+<table><tr><th>joint</th><th class="n">position</th><th class="n">velocity</th></tr>
+{% for r in joint_viol %}<tr><td>{{ r.joint }}</td><td class="n">{{ '%.1f'|format(r.position_violation_share*100) }}%</td><td class="n">{{ '%.1f'|format(r.velocity_violation_share*100) }}%</td></tr>{% endfor %}
+</table>
+
+<h2>2. Skeleton overview</h2>
+<h3>MB-Lab character: {{ mblab.n_bones }} bones, height {{ mblab.height_m }} m</h3>
+<div class="scroll">{{ mblab_svg }}</div>
+<h3>Robot skeleton (generic)</h3>
+<div class="scroll">{{ robot_svg }}</div>
+<h3>Degrees of freedom, axes and limits</h3>
+<p class="reasons">Axis = rotation axis in the parent frame (x forward, y left, z up). Limits and velocities are hand-picked engineering values in <code>config/robot_skeleton.yaml</code>.</p>
+<table><tr><th>chain</th><th>joint</th><th>axis</th><th class="n">min (deg)</th><th class="n">max (deg)</th><th class="n">max vel (deg/s)</th></tr>
+{% for r in dof %}<tr><td>{{ r.chain }}</td><td>{{ r.joint }}</td><td>{{ r.axis }}</td><td class="n">{{ '%.0f'|format(r.lo_deg) }}</td><td class="n">{{ '%.0f'|format(r.hi_deg) }}</td><td class="n">{{ '%.0f'|format(r.max_vel_dps) }}</td></tr>{% endfor %}
+</table>
+
+<h2>3. Per-clip verdicts</h2>
+<div class="scroll"><table>
+<tr><th>clip</th><th>task</th><th>verdict</th><th class="n">feasible frames</th><th class="n">K2 pos.</th><th class="n">K3 vel.</th><th class="n">K4 cm</th><th class="n">K5 reach</th><th class="n">K6 slide</th><th class="n">K7 collide</th></tr>
+{% for r in summary %}<tr>
+<td><b>{{ r.clip_id }}</b></td><td>{{ r.task }}</td><td><span class="tag {{ cls[r.verdict] }}">{{ r.verdict }}</span></td>
+<td class="n">{{ '%.0f'|format(r.feasible_frame_share*100) }}%</td><td class="n">{{ '%.0f'|format(r.k2_limit_violation_share*100) }}%</td><td class="n">{{ '%.0f'|format(r.k3_velocity_violation_share*100) }}%</td>
+<td class="n">{{ '%.1f'|format(r.k4_clamp_distortion_mean_cm) }}</td><td class="n">{{ '%.0f'|format(r.k5_out_of_reach_share*100) }}%</td><td class="n">{{ '%.0f'|format(r.k6_foot_slide_share*100) }}%</td><td class="n">{{ '%.0f'|format(r.k7_self_collision_share*100) }}%</td></tr>
+{% endfor %}</table></div>
+{% for r in summary %}{% if r.reasons %}<p class="reasons"><b>{{ r.clip_id }}</b>: {{ esc(r.reasons) }}</p>{% endif %}{% endfor %}
+<details><summary>Check catalog (K1–K8)</summary><table><tr><th>ID</th><th>check</th><th>what it measures</th></tr>
+{% for cid, name, desc in checks %}<tr><td>{{ cid }}</td><td>{{ name }}</td><td>{{ desc }}</td></tr>{% endfor %}</table></details>
+{% for r in summary %}<div class="clip"><h3>{{ r.clip_id }} · {{ r.task }}</h3>
+<img src="renders/{{ r.clip_id }}_side_by_side.gif" alt="{{ r.clip_id }} side by side" loading="lazy"></div>{% endfor %}
+
+<h2>4. Joint-angle plots</h2>
+<p class="reasons">Green band = joint limit. Grey = raw retarget, blue = clamped, orange dots = frames past the limit. The 8 joints with the most violations are shown per clip.</p>
+{% for r in summary %}<div class="clip"><b>{{ r.clip_id }}</b> <span class="tag {{ cls[r.verdict] }}">{{ r.verdict }}</span><br><img src="data:image/png;base64,{{ figs[r.clip_id] }}" alt="joint angles {{ r.clip_id }}" loading="lazy"></div>{% endfor %}
+
+<h2>5. Reach envelope</h2>
+<img src="data:image/png;base64,{{ reach }}" alt="reach envelope">
+<p class="reasons">Envelope: {{ '{:,}'.format(300000) }} samples per arm over waist + arm joint limits (Beta(½,½) sampling to populate the extremes); a target is "inside" if a sample lies within {{ th.k5_reach_envelope.tolerance_cm }} cm.</p>
+
+<h2>6. Retargeting method comparison</h2>
+<img src="data:image/png;base64,{{ methods_img }}" alt="method comparison">
+<table><tr><th>method</th><th class="n">mean FK error (cm)</th><th class="n">max FK error (cm)</th><th class="n">clamped FK error (cm)</th><th class="n">frames past a limit</th></tr>
+{% for r in cmp_mean %}<tr><td>{{ r.method }}</td><td class="n">{{ '%.2f'|format(r.fk_err_mean_cm) }}</td><td class="n">{{ '%.2f'|format(r.fk_err_max_cm) }}</td><td class="n">{{ '%.2f'|format(r.clamped_fk_err_mean_cm) }}</td><td class="n">{{ '%.0f'|format(r.frames_over_limit_share*100) }}%</td></tr>{% endfor %}
+</table>
+<p class="reasons">FK error = distance from the robot tool point (forward kinematics of the joint angles) to the human hand position scaled by arm length. Joint-angle-only copies the human's joint rotations, so link-length differences move the hand; IK moves the arm joints (damped least squares, regularised toward the joint-angle solution) until the hand lands on the target.</p>
+<details><summary>Per-clip comparison</summary><table><tr><th>clip</th><th class="n">joint-angle err (cm)</th><th class="n">IK err (cm)</th><th class="n">joint-angle past limit</th><th class="n">IK past limit</th></tr>
+{% for r in cmp_clip %}<tr><td>{{ r.clip_id }}</td><td class="n">{{ '%.2f'|format(r['fk_err_mean_cm|joint_angle']) }}</td><td class="n">{{ '%.2f'|format(r['fk_err_mean_cm|ik_refined']) }}</td><td class="n">{{ '%.0f'|format(r['frames_over_limit_share|joint_angle']*100) }}%</td><td class="n">{{ '%.0f'|format(r['frames_over_limit_share|ik_refined']*100) }}%</td></tr>{% endfor %}</table></details>
+
+<h2>7. What this means for data collection</h2>
+<ol class="take">{% for t in takeaways %}<li>{{ t }}</li>{% endfor %}</ol>
+
+<h2>8. Methodology and limitations</h2>
+<h3>Pipeline</h3>
+<ol>
+<li><b>Mocap → MB-Lab.</b> CMU BVH (Y-up, 120 Hz, frame 0 = T-pose) is parsed, converted once to Blender axes (Z-up, faces −Y) and decimated to {{ fps }} Hz. For each mapped bone the source world rotation <i>delta from its T-pose</i> is applied to the target bone's T-pose reference orientation (the MB-Lab A-pose bone swung onto the source T-pose direction), never a raw rotation copy. Root motion is the hip-joint midpoint's displacement scaled by the leg-length ratio. Baked to an action in Blender {{ blender.version }} with MB-Lab {{ blender.mblab_version }}.</li>
+<li><b>MB-Lab → robot.</b> Segment rotations are expressed in the robot frame and decomposed onto the robot's signed joint axes (exact Euler for 3-DoF joints with temporal continuity, tracked least squares for the 1–2 DoF joints), parent first. The pelvis supplies the heading; the 2-DoF waist absorbs trunk tilt. Optional IK refines each arm to the scaled human hand position.</li>
+<li><b>Raw vs clamped.</b> Raw ignores limits (what the human did). Clamped clips each joint to its position limits and slew-limits it to its max velocity (what the robot can do).</li>
+<li><b>Checks K1–K8</b> with thresholds from <code>config/thresholds.yaml</code>; the verdict rules are in the same file.</li>
+</ol>
+<h3>Limitations</h3>
+<ul>
+<li>The robot is a <b>generic, hand-specified skeleton</b>; its limits, velocities and link lengths are not any real robot's. Treat verdict percentages as demonstrations of the method.</li>
+<li>Collision is a capsule proxy (forearm/hand vs one torso capsule); no head, legs, or arm-to-arm checks.</li>
+<li>The waist has no roll DoF and wrists have no roll, so those components of the human motion are least-squares dropped; this shows up in K1 for joint-angle-only retargeting.</li>
+<li>Foot sliding (K6) is measured on the MB-Lab retarget (the human side); the robot's feet are not planted by an IK solver. No balance/dynamics model: legs are only checked against joint and velocity limits.</li>
+<li>Rotation retargeting does not match end-effector positions across body proportions; that is what the IK stage is for. Hand/finger motion is not retargeted.</li>
+<li>Mocap comes from one public dataset (CMU, a few subjects); the clips are short windows, not a representative demonstration set.</li>
+</ul>
+</main></body></html>

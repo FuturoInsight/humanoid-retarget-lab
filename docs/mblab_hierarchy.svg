@@ -1,0 +1,216 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1990" height="432" viewBox="0 0 1990 432" font-family="Consolas, monospace" font-size="11">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="20" y="16" font-size="13" font-weight="bold">MB-Lab skeleton hierarchy (71 bones)</text>
+<path d="M26,185.0 C60,185.0 130,185.0 164,185.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M176,185.0 C210,185.0 280,64.0 314,64.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M326,64.0 C360,64.0 430,52.0 464,52.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M476,52.0 C510,52.0 580,44.0 614,44.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M626,44.0 C660,44.0 730,44.0 764,44.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M476,52.0 C510,52.0 580,60.0 614,60.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M326,64.0 C360,64.0 430,76.0 464,76.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M176,185.0 C210,185.0 280,112.0 314,112.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M326,112.0 C360,112.0 430,100.0 464,100.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M476,100.0 C510,100.0 580,92.0 614,92.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M626,92.0 C660,92.0 730,92.0 764,92.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M476,100.0 C510,100.0 580,108.0 614,108.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M326,112.0 C360,112.0 430,124.0 464,124.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M176,185.0 C210,185.0 280,306.0 314,306.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M326,306.0 C360,306.0 430,306.0 464,306.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M476,306.0 C510,306.0 580,306.0 614,306.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M626,306.0 C660,306.0 730,216.0 764,216.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M776,216.0 C810,216.0 880,216.0 914,216.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M926,216.0 C960,216.0 1030,196.0 1064,196.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1076,196.0 C1110,196.0 1180,172.0 1214,172.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1226,172.0 C1260,172.0 1330,140.0 1364,140.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1376,140.0 C1410,140.0 1480,140.0 1514,140.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1526,140.0 C1560,140.0 1630,140.0 1664,140.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1226,172.0 C1260,172.0 1330,156.0 1364,156.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1376,156.0 C1410,156.0 1480,156.0 1514,156.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1526,156.0 C1560,156.0 1630,156.0 1664,156.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1676,156.0 C1710,156.0 1780,156.0 1814,156.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1226,172.0 C1260,172.0 1330,172.0 1364,172.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1376,172.0 C1410,172.0 1480,172.0 1514,172.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1526,172.0 C1560,172.0 1630,172.0 1664,172.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1676,172.0 C1710,172.0 1780,172.0 1814,172.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1226,172.0 C1260,172.0 1330,188.0 1364,188.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1376,188.0 C1410,188.0 1480,188.0 1514,188.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1526,188.0 C1560,188.0 1630,188.0 1664,188.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1676,188.0 C1710,188.0 1780,188.0 1814,188.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1226,172.0 C1260,172.0 1330,204.0 1364,204.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1376,204.0 C1410,204.0 1480,204.0 1514,204.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1526,204.0 C1560,204.0 1630,204.0 1664,204.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1676,204.0 C1710,204.0 1780,204.0 1814,204.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1076,196.0 C1110,196.0 1180,220.0 1214,220.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M926,216.0 C960,216.0 1030,236.0 1064,236.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M626,306.0 C660,306.0 730,328.0 764,328.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M776,328.0 C810,328.0 880,328.0 914,328.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M926,328.0 C960,328.0 1030,308.0 1064,308.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1076,308.0 C1110,308.0 1180,284.0 1214,284.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1226,284.0 C1260,284.0 1330,252.0 1364,252.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1376,252.0 C1410,252.0 1480,252.0 1514,252.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1526,252.0 C1560,252.0 1630,252.0 1664,252.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1226,284.0 C1260,284.0 1330,268.0 1364,268.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1376,268.0 C1410,268.0 1480,268.0 1514,268.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1526,268.0 C1560,268.0 1630,268.0 1664,268.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1676,268.0 C1710,268.0 1780,268.0 1814,268.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1226,284.0 C1260,284.0 1330,284.0 1364,284.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1376,284.0 C1410,284.0 1480,284.0 1514,284.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1526,284.0 C1560,284.0 1630,284.0 1664,284.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1676,284.0 C1710,284.0 1780,284.0 1814,284.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1226,284.0 C1260,284.0 1330,300.0 1364,300.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1376,300.0 C1410,300.0 1480,300.0 1514,300.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1526,300.0 C1560,300.0 1630,300.0 1664,300.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1676,300.0 C1710,300.0 1780,300.0 1814,300.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1226,284.0 C1260,284.0 1330,316.0 1364,316.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1376,316.0 C1410,316.0 1480,316.0 1514,316.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1526,316.0 C1560,316.0 1630,316.0 1664,316.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1676,316.0 C1710,316.0 1780,316.0 1814,316.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M1076,308.0 C1110,308.0 1180,332.0 1214,332.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M926,328.0 C960,328.0 1030,348.0 1064,348.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M626,306.0 C660,306.0 730,364.0 764,364.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M776,364.0 C810,364.0 880,364.0 914,364.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M626,306.0 C660,306.0 730,380.0 764,380.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<path d="M626,306.0 C660,306.0 730,396.0 764,396.0" fill="none" stroke="#9aa5b1" stroke-width="1"/>
+<circle cx="20" cy="185.0" r="3.5" fill="#2f3a46"/>
+<text x="27" y="189.0" fill="#1b232c">root</text>
+<circle cx="170" cy="185.0" r="3.5" fill="#2f3a46"/>
+<text x="177" y="189.0" fill="#1b232c">pelvis</text>
+<circle cx="320" cy="64.0" r="3.5" fill="#2f3a46"/>
+<text x="327" y="68.0" fill="#1b232c">thigh_R</text>
+<circle cx="470" cy="52.0" r="3.5" fill="#2f3a46"/>
+<text x="477" y="56.0" fill="#1b232c">calf_R</text>
+<circle cx="620" cy="44.0" r="3.5" fill="#2f3a46"/>
+<text x="627" y="48.0" fill="#1b232c">foot_R</text>
+<circle cx="770" cy="44.0" r="3.5" fill="#2f3a46"/>
+<text x="777" y="48.0" fill="#1b232c">toes_R</text>
+<circle cx="620" cy="60.0" r="3.5" fill="#2f3a46"/>
+<text x="627" y="64.0" fill="#1b232c">calf_twist_R</text>
+<circle cx="470" cy="76.0" r="3.5" fill="#2f3a46"/>
+<text x="477" y="80.0" fill="#1b232c">thigh_twist_R</text>
+<circle cx="320" cy="112.0" r="3.5" fill="#2f3a46"/>
+<text x="327" y="116.0" fill="#1b232c">thigh_L</text>
+<circle cx="470" cy="100.0" r="3.5" fill="#2f3a46"/>
+<text x="477" y="104.0" fill="#1b232c">calf_L</text>
+<circle cx="620" cy="92.0" r="3.5" fill="#2f3a46"/>
+<text x="627" y="96.0" fill="#1b232c">foot_L</text>
+<circle cx="770" cy="92.0" r="3.5" fill="#2f3a46"/>
+<text x="777" y="96.0" fill="#1b232c">toes_L</text>
+<circle cx="620" cy="108.0" r="3.5" fill="#2f3a46"/>
+<text x="627" y="112.0" fill="#1b232c">calf_twist_L</text>
+<circle cx="470" cy="124.0" r="3.5" fill="#2f3a46"/>
+<text x="477" y="128.0" fill="#1b232c">thigh_twist_L</text>
+<circle cx="320" cy="306.0" r="3.5" fill="#2f3a46"/>
+<text x="327" y="310.0" fill="#1b232c">spine01</text>
+<circle cx="470" cy="306.0" r="3.5" fill="#2f3a46"/>
+<text x="477" y="310.0" fill="#1b232c">spine02</text>
+<circle cx="620" cy="306.0" r="3.5" fill="#2f3a46"/>
+<text x="627" y="310.0" fill="#1b232c">spine03</text>
+<circle cx="770" cy="216.0" r="3.5" fill="#2f3a46"/>
+<text x="777" y="220.0" fill="#1b232c">clavicle_L</text>
+<circle cx="920" cy="216.0" r="3.5" fill="#2f3a46"/>
+<text x="927" y="220.0" fill="#1b232c">upperarm_L</text>
+<circle cx="1070" cy="196.0" r="3.5" fill="#2f3a46"/>
+<text x="1077" y="200.0" fill="#1b232c">lowerarm_L</text>
+<circle cx="1220" cy="172.0" r="3.5" fill="#2f3a46"/>
+<text x="1227" y="176.0" fill="#1b232c">hand_L</text>
+<circle cx="1370" cy="140.0" r="3.5" fill="#2f3a46"/>
+<text x="1377" y="144.0" fill="#1b232c">thumb01_L</text>
+<circle cx="1520" cy="140.0" r="3.5" fill="#2f3a46"/>
+<text x="1527" y="144.0" fill="#1b232c">thumb02_L</text>
+<circle cx="1670" cy="140.0" r="3.5" fill="#2f3a46"/>
+<text x="1677" y="144.0" fill="#1b232c">thumb03_L</text>
+<circle cx="1370" cy="156.0" r="3.5" fill="#2f3a46"/>
+<text x="1377" y="160.0" fill="#1b232c">index00_L</text>
+<circle cx="1520" cy="156.0" r="3.5" fill="#2f3a46"/>
+<text x="1527" y="160.0" fill="#1b232c">index01_L</text>
+<circle cx="1670" cy="156.0" r="3.5" fill="#2f3a46"/>
+<text x="1677" y="160.0" fill="#1b232c">index02_L</text>
+<circle cx="1820" cy="156.0" r="3.5" fill="#2f3a46"/>
+<text x="1827" y="160.0" fill="#1b232c">index03_L</text>
+<circle cx="1370" cy="172.0" r="3.5" fill="#2f3a46"/>
+<text x="1377" y="176.0" fill="#1b232c">middle00_L</text>
+<circle cx="1520" cy="172.0" r="3.5" fill="#2f3a46"/>
+<text x="1527" y="176.0" fill="#1b232c">middle01_L</text>
+<circle cx="1670" cy="172.0" r="3.5" fill="#2f3a46"/>
+<text x="1677" y="176.0" fill="#1b232c">middle02_L</text>
+<circle cx="1820" cy="172.0" r="3.5" fill="#2f3a46"/>
+<text x="1827" y="176.0" fill="#1b232c">middle03_L</text>
+<circle cx="1370" cy="188.0" r="3.5" fill="#2f3a46"/>
+<text x="1377" y="192.0" fill="#1b232c">ring00_L</text>
+<circle cx="1520" cy="188.0" r="3.5" fill="#2f3a46"/>
+<text x="1527" y="192.0" fill="#1b232c">ring01_L</text>
+<circle cx="1670" cy="188.0" r="3.5" fill="#2f3a46"/>
+<text x="1677" y="192.0" fill="#1b232c">ring02_L</text>
+<circle cx="1820" cy="188.0" r="3.5" fill="#2f3a46"/>
+<text x="1827" y="192.0" fill="#1b232c">ring03_L</text>
+<circle cx="1370" cy="204.0" r="3.5" fill="#2f3a46"/>
+<text x="1377" y="208.0" fill="#1b232c">pinky00_L</text>
+<circle cx="1520" cy="204.0" r="3.5" fill="#2f3a46"/>
+<text x="1527" y="208.0" fill="#1b232c">pinky01_L</text>
+<circle cx="1670" cy="204.0" r="3.5" fill="#2f3a46"/>
+<text x="1677" y="208.0" fill="#1b232c">pinky02_L</text>
+<circle cx="1820" cy="204.0" r="3.5" fill="#2f3a46"/>
+<text x="1827" y="208.0" fill="#1b232c">pinky03_L</text>
+<circle cx="1220" cy="220.0" r="3.5" fill="#2f3a46"/>
+<text x="1227" y="224.0" fill="#1b232c">lowerarm_twist_L</text>
+<circle cx="1070" cy="236.0" r="3.5" fill="#2f3a46"/>
+<text x="1077" y="240.0" fill="#1b232c">upperarm_twist_L</text>
+<circle cx="770" cy="328.0" r="3.5" fill="#2f3a46"/>
+<text x="777" y="332.0" fill="#1b232c">clavicle_R</text>
+<circle cx="920" cy="328.0" r="3.5" fill="#2f3a46"/>
+<text x="927" y="332.0" fill="#1b232c">upperarm_R</text>
+<circle cx="1070" cy="308.0" r="3.5" fill="#2f3a46"/>
+<text x="1077" y="312.0" fill="#1b232c">lowerarm_R</text>
+<circle cx="1220" cy="284.0" r="3.5" fill="#2f3a46"/>
+<text x="1227" y="288.0" fill="#1b232c">hand_R</text>
+<circle cx="1370" cy="252.0" r="3.5" fill="#2f3a46"/>
+<text x="1377" y="256.0" fill="#1b232c">thumb01_R</text>
+<circle cx="1520" cy="252.0" r="3.5" fill="#2f3a46"/>
+<text x="1527" y="256.0" fill="#1b232c">thumb02_R</text>
+<circle cx="1670" cy="252.0" r="3.5" fill="#2f3a46"/>
+<text x="1677" y="256.0" fill="#1b232c">thumb03_R</text>
+<circle cx="1370" cy="268.0" r="3.5" fill="#2f3a46"/>
+<text x="1377" y="272.0" fill="#1b232c">index00_R</text>
+<circle cx="1520" cy="268.0" r="3.5" fill="#2f3a46"/>
+<text x="1527" y="272.0" fill="#1b232c">index01_R</text>
+<circle cx="1670" cy="268.0" r="3.5" fill="#2f3a46"/>
+<text x="1677" y="272.0" fill="#1b232c">index02_R</text>
+<circle cx="1820" cy="268.0" r="3.5" fill="#2f3a46"/>
+<text x="1827" y="272.0" fill="#1b232c">index03_R</text>
+<circle cx="1370" cy="284.0" r="3.5" fill="#2f3a46"/>
+<text x="1377" y="288.0" fill="#1b232c">middle00_R</text>
+<circle cx="1520" cy="284.0" r="3.5" fill="#2f3a46"/>
+<text x="1527" y="288.0" fill="#1b232c">middle01_R</text>
+<circle cx="1670" cy="284.0" r="3.5" fill="#2f3a46"/>
+<text x="1677" y="288.0" fill="#1b232c">middle02_R</text>
+<circle cx="1820" cy="284.0" r="3.5" fill="#2f3a46"/>
+<text x="1827" y="288.0" fill="#1b232c">middle03_R</text>
+<circle cx="1370" cy="300.0" r="3.5" fill="#2f3a46"/>
+<text x="1377" y="304.0" fill="#1b232c">ring00_R</text>
+<circle cx="1520" cy="300.0" r="3.5" fill="#2f3a46"/>
+<text x="1527" y="304.0" fill="#1b232c">ring01_R</text>
+<circle cx="1670" cy="300.0" r="3.5" fill="#2f3a46"/>
+<text x="1677" y="304.0" fill="#1b232c">ring02_R</text>
+<circle cx="1820" cy="300.0" r="3.5" fill="#2f3a46"/>
+<text x="1827" y="304.0" fill="#1b232c">ring03_R</text>
+<circle cx="1370" cy="316.0" r="3.5" fill="#2f3a46"/>
+<text x="1377" y="320.0" fill="#1b232c">pinky00_R</text>
+<circle cx="1520" cy="316.0" r="3.5" fill="#2f3a46"/>
+<text x="1527" y="320.0" fill="#1b232c">pinky01_R</text>
+<circle cx="1670" cy="316.0" r="3.5" fill="#2f3a46"/>
+<text x="1677" y="320.0" fill="#1b232c">pinky02_R</text>
+<circle cx="1820" cy="316.0" r="3.5" fill="#2f3a46"/>
+<text x="1827" y="320.0" fill="#1b232c">pinky03_R</text>
+<circle cx="1220" cy="332.0" r="3.5" fill="#2f3a46"/>
+<text x="1227" y="336.0" fill="#1b232c">lowerarm_twist_R</text>
+<circle cx="1070" cy="348.0" r="3.5" fill="#2f3a46"/>
+<text x="1077" y="352.0" fill="#1b232c">upperarm_twist_R</text>
+<circle cx="770" cy="364.0" r="3.5" fill="#2f3a46"/>
+<text x="777" y="368.0" fill="#1b232c">neck</text>
+<circle cx="920" cy="364.0" r="3.5" fill="#2f3a46"/>
+<text x="927" y="368.0" fill="#1b232c">head</text>
+<circle cx="770" cy="380.0" r="3.5" fill="#2f3a46"/>
+<text x="777" y="384.0" fill="#1b232c">breast_L</text>
+<circle cx="770" cy="396.0" r="3.5" fill="#2f3a46"/>
+<text x="777" y="400.0" fill="#1b232c">breast_R</text>
+</svg>

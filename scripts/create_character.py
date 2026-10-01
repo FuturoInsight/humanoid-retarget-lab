@@ -8,6 +8,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import bpy  # noqa: E402
+
 from _common import enable_mblab, script_args  # noqa: E402
 
 args = script_args(
@@ -28,6 +29,8 @@ for name in ("Cube", "Light", "Camera"):
 
 arm = next(o for o in bpy.data.objects if o.type == "ARMATURE")
 mesh = next(o for o in bpy.data.objects if o.type == "MESH")
-print(f"CHARACTER mesh={mesh.name} armature={arm.name} bones={len(arm.data.bones)} dims={tuple(mesh.dimensions)}")
+print(
+    f"CHARACTER mesh={mesh.name} armature={arm.name} bones={len(arm.data.bones)} dims={tuple(mesh.dimensions)}"
+)
 os.makedirs(os.path.dirname(os.path.abspath(args.out)), exist_ok=True)
 bpy.ops.wm.save_as_mainfile(filepath=os.path.abspath(args.out))

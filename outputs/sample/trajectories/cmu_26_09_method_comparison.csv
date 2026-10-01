@@ -1,0 +1,3 @@
+method,fk_err_mean_cm,fk_err_max_cm,clamped_fk_err_mean_cm,frames_over_limit_share,clip_id
+joint_angle,13.441246711520623,19.44598660086017,13.157173897288665,1.0,cmu_26_09
+ik_refined,1.575879665374617,3.4723685184420394,1.7502056825177847,1.0,cmu_26_09
