@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Humanoid Retarget Lab</title>
+<meta name="description" content="CMU mocap retargeted onto an MB-Lab character and a generic robot skeleton, with kinematics QA checks.">
+<style>
+  :root { --bg:#fff; --fg:#1f2933; --muted:#5f6b7a; --line:#d9dee4; --card:#f5f7f9; --accent:#ff5c00; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#14181d; --fg:#e6eaee; --muted:#9aa5b1; --line:#2b323a; --card:#1b2026; } }
+  body { background:var(--bg); color:var(--fg); font:16px/1.6 system-ui,"Segoe UI",sans-serif; margin:0; }
+  main { max-width:960px; margin:0 auto; padding:32px 16px 64px; }
+  h1 { font-size:30px; margin:0 0 6px; } p.lead { color:var(--muted); margin:0 0 20px; font-size:17px; }
+  img.hero { width:100%; height:auto; border-radius:8px; border:1px solid var(--line); }
+  .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:10px; margin:22px 0; }
+  .kpi { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:10px 14px; }
+  .kpi b { display:block; font-size:24px; } .kpi span { color:var(--muted); font-size:13px; }
+  .links { display:flex; flex-wrap:wrap; gap:10px; margin:22px 0; }
+  .links a { padding:9px 16px; border:1.5px solid var(--accent); border-radius:8px; color:var(--accent); text-decoration:none; font-weight:600; }
+  .links a.primary { background:var(--accent); color:#fff; }
+  h2 { font-size:19px; margin:30px 0 8px; } li { margin:4px 0; } .note { color:var(--muted); font-size:14px; }
+  .clips { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; }
+  .clips figure { margin:0; } .clips img { width:100%; height:auto; border-radius:6px; border:1px solid var(--line); }
+  .clips figcaption { font-size:13px; color:var(--muted); }
+</style>
+</head>
+<body><main>
+<h1>Humanoid Rig &amp; Motion Retargeting Lab</h1>
+<p class="lead">Real human motion capture, retargeted onto a Blender/MB-Lab character and a generic 28-DoF robot skeleton, then audited for what a robot could actually execute.</p>
+<img class="hero" src="docs/hero_cmu_69_72.gif" alt="Mocap stick figure, MB-Lab character and robot skeleton performing a pick and place">
+<p class="note">Left to right: CMU mocap, MB-Lab character, robot skeleton. Links past a joint limit turn safety orange.</p>
+
+<div class="kpis">
+  <div class="kpi"><b>11</b><span>CMU clips retargeted to both rigs</span></div>
+  <div class="kpi"><b>2,824</b><span>frames analysed</span></div>
+  <div class="kpi"><b>50%</b><span>frames executable as demonstrated</span></div>
+  <div class="kpi"><b>1.7 cm</b><span>hand error with IK (12.4 cm without)</span></div>
+</div>
+
+<div class="links">
+  <a class="primary" href="outputs/sample/report.html">Quality report</a>
+  <a href="https://github.com/FuturoInsight/humanoid-retarget-lab">Source &amp; README</a>
+  <a href="https://github.com/FuturoInsight/humanoid-retarget-lab/blob/main/DECISIONS.md">Decisions &amp; deviations</a>
+</div>
+
+<h2>Why it matters for data collection</h2>
+<p>Human demonstrations become robot training data only if the robot can reproduce them. This project checks, per clip, whether the human reached outside the robot's workspace, bent past its waist limit, moved faster than its actuators, or drove its hand into its own torso, and issues a verdict: usable, usable with clamping, or not feasible.</p>
+
+<h2>What is inside</h2>
+<ul>
+  <li>MB-Lab character built headless in Blender 4.0; CMU BVH retargeted with per-bone rest-pose correction.</li>
+  <li>Robot retargeting by rotation decomposition onto joint axes, plus damped-least-squares IK.</li>
+  <li>Eight kinematics checks (FK error, position and velocity limits, clamping distortion, reach envelope, foot sliding, self-collision, jitter).</li>
+  <li>LeRobot-style export for a downstream QA pipeline; 45 unit tests that run without Blender.</li>
+</ul>
+<p class="note">The robot is a generic, hand-specified skeleton, not any real robot; verdicts demonstrate the method.</p>
+
+<h2>More renders</h2>
+<div class="clips">
+  <figure><img src="docs/hero_cmu_14_07.gif" alt="Overhead reach, not feasible" loading="lazy"><figcaption>cmu_14_07: jump to grab (not feasible)</figcaption></figure>
+  <figure><img src="outputs/sample/renders/cmu_69_73_side_by_side.gif" alt="Bend to pick" loading="lazy"><figcaption>cmu_69_73: lean over to pick up (waist limit, floor reach)</figcaption></figure>
+  <figure><img src="outputs/sample/renders/cmu_62_20_side_by_side.gif" alt="Box handling" loading="lazy"><figcaption>cmu_62_20: close, move and open a box</figcaption></figure>
+</div>
+<p class="note">Mocap: CMU Graphics Lab Motion Capture Database (BVH conversion by B. Hahne). Character: MB-Lab. Software: Blender.</p>
+</main></body>
+</html>

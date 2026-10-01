@@ -26,7 +26,7 @@ Things the numbers do and do not say:
 * `cmu_26_09` ("bend, pick up") is flagged on every frame because the source right hand is twisted about 150 degrees relative to the forearm from the first frame. That looks like a capture/conversion artifact in the CMU file; it is kept as found.
 * Reach: the clearest case is picking from the floor (`cmu_69_73`: 20 % of frames have a hand target below the robot's workspace).
 
-Full report: `outputs/sample/report.html` (and `report.md`); per-clip GIF/MP4 renders in `outputs/sample/renders/`.
+Live page: https://futuroinsight.github.io/humanoid-retarget-lab/ · full report: https://futuroinsight.github.io/humanoid-retarget-lab/outputs/sample/report.html (source: `outputs/sample/report.html` and `report.md`); per-clip GIF/MP4 renders in `outputs/sample/renders/`.
 
 ## Primer (plain English)
 
@@ -106,7 +106,7 @@ make test lint
 
 ## Repo layout
 
-`config/` (robot, thresholds, bone map, run config) · `scripts/` (Blender-side, `bpy`) · `src/retarget_lab/` (testable analysis package: `bvh`, `skeleton`, `kinematics/`, `retarget/`, `checks`, `report`, `export`, ...) · `tests/` · `templates/report.html.j2` · `docs/` · `outputs/sample/` (the committed sample run; Blender intermediates are gitignored) · `DECISIONS.md` (every deviation from the spec).
+`index.html` (GitHub Pages landing page) · `config/` (robot, thresholds, bone map, run config) · `scripts/` (Blender-side, `bpy`) · `src/retarget_lab/` (testable analysis package: `bvh`, `skeleton`, `kinematics/`, `retarget/`, `checks`, `report`, `export`, ...) · `tests/` · `templates/report.html.j2` · `docs/` · `outputs/sample/` (the committed sample run; Blender intermediates are gitignored) · `DECISIONS.md` (every deviation from the spec).
 
 ## Limitations
 
