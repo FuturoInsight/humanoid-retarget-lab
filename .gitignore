@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+tools/blender/
+tools/blender_user/
+data/raw/
+assets/*.blend
+assets/*.blend1
+outputs/*
+!outputs/sample/
+outputs/sample/blends/
+outputs/sample/blender/

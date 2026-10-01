@@ -1,0 +1,84 @@
+# Generic humanoid robot skeleton (v0). NOT any real robot's specification.
+# Every number is a plausible, hand-picked engineering choice so the checks have something to bite on;
+# tweak freely and re-run. Units: metres, degrees, degrees/second.
+#
+# Frame (REP-103): x forward, y left, z up. Base frame = pelvis centre, level (heading-only).
+# Zero pose: standing, arms hanging straight down, legs straight down, feet flat.
+# A chain is serial:  T = T_origin * prod_i( Rot(axis_i, q_i) * Trans(offset_after_i) )
+# so a joint's `offset_after` is the link that follows it, expressed in that joint's rotated frame.
+name: generic_humanoid_v0
+height_m: 1.65          # standing height with the head link as defined below (informative)
+hip_height_m: 0.88      # base (pelvis) height above the floor in the zero pose
+
+dims:
+  thigh: 0.40
+  shank: 0.40
+  ankle_height: 0.08
+  upper_arm: 0.28
+  forearm: 0.26
+  hand: 0.12            # wrist joint -> tool point (palm centre)
+  shoulder_half_span: 0.20
+  waist_to_shoulder_z: 0.42
+  waist_to_neck_z: 0.50
+  hip_half_span: 0.10
+
+collision:                # K7 capsule proxy (radii in m)
+  torso: {radius: 0.14, z_from: -0.05, z_to: 0.44}   # capsule axis along torso z, in the torso frame
+  forearm_radius: 0.045
+  hand_radius: 0.05
+
+chains:
+  waist:
+    parent: base
+    origin: [0.0, 0.0, 0.0]
+    joints:
+      - {name: waist_yaw,   axis: [0, 0, 1], limits_deg: [-60, 60], max_vel_dps: 120, offset_after: [0, 0, 0]}
+      # +y rotation tips +z toward +x, i.e. positive pitch = leaning forward.
+      # Forward limit 60 deg (not the ~90 a human bends) so deep bends show up as violations.
+      - {name: waist_pitch, axis: [0, 1, 0], limits_deg: [-25, 60], max_vel_dps: 90,  offset_after: [0, 0, 0]}
+  head:
+    parent: torso
+    origin: [0.0, 0.0, 0.50]
+    joints:
+      - {name: head_yaw,   axis: [0, 0, 1], limits_deg: [-70, 70],  max_vel_dps: 200, offset_after: [0, 0, 0]}
+      - {name: head_pitch, axis: [0, 1, 0], limits_deg: [-30, 45],  max_vel_dps: 200, offset_after: [0, 0, 0.20]}
+  left_arm:
+    parent: torso
+    origin: [0.0, 0.20, 0.42]
+    joints:
+      # Arm hangs along -z. Rotating about -y swings the arm forward => positive pitch = flexion (arm raises forward).
+      - {name: l_shoulder_pitch, axis: [0, -1, 0], limits_deg: [-60, 165], max_vel_dps: 180, offset_after: [0, 0, 0]}
+      # +x on the left arm swings it toward +y (away from the body) => positive roll = abduction.
+      - {name: l_shoulder_roll,  axis: [1, 0, 0],  limits_deg: [-25, 135], max_vel_dps: 180, offset_after: [0, 0, 0]}
+      # Yaw about the upper-arm axis; the link (upper arm) follows this joint.
+      - {name: l_shoulder_yaw,   axis: [0, 0, 1],  limits_deg: [-80, 80],  max_vel_dps: 220, offset_after: [0, 0, -0.28]}
+      # About -y: positive = elbow flexion (forearm swings forward).
+      - {name: l_elbow_pitch,    axis: [0, -1, 0], limits_deg: [0, 135],   max_vel_dps: 240, offset_after: [0, 0, -0.26]}
+      - {name: l_wrist_yaw,      axis: [0, 0, 1],  limits_deg: [-90, 90],  max_vel_dps: 300, offset_after: [0, 0, 0]}
+      - {name: l_wrist_pitch,    axis: [0, -1, 0], limits_deg: [-60, 60],  max_vel_dps: 300, offset_after: [0, 0, -0.12]}
+  right_arm:
+    mirror_of: left_arm      # y of origin and the x/z components of every axis are negated; limits are shared
+    rename: ["l_", "r_"]
+  left_leg:
+    parent: base
+    origin: [0.0, 0.10, 0.0]
+    joints:
+      - {name: l_hip_yaw,     axis: [0, 0, 1],  limits_deg: [-45, 45],  max_vel_dps: 250, offset_after: [0, 0, 0]}
+      - {name: l_hip_roll,    axis: [1, 0, 0],  limits_deg: [-30, 45],  max_vel_dps: 250, offset_after: [0, 0, 0]}
+      - {name: l_hip_pitch,   axis: [0, -1, 0], limits_deg: [-30, 120], max_vel_dps: 250, offset_after: [0, 0, -0.40]}
+      # About +y: positive = knee flexion (shank swings backward).
+      - {name: l_knee_pitch,  axis: [0, 1, 0],  limits_deg: [0, 135],   max_vel_dps: 300, offset_after: [0, 0, -0.40]}
+      - {name: l_ankle_pitch, axis: [0, -1, 0], limits_deg: [-40, 40],  max_vel_dps: 250, offset_after: [0, 0, 0]}
+      - {name: l_ankle_roll,  axis: [1, 0, 0],  limits_deg: [-25, 25],  max_vel_dps: 250, offset_after: [0, 0, -0.08]}
+  right_leg:
+    mirror_of: left_leg
+    rename: ["l_", "r_"]
+
+# Which MB-Lab bones drive which robot segment (used by retarget/to_robot.py).
+human_source:
+  pelvis: pelvis
+  chest: spine03
+  head: head
+  left:  {upper_arm: upperarm_L, forearm: lowerarm_L, hand: hand_L, thigh: thigh_L, shank: calf_L, foot: foot_L}
+  right: {upper_arm: upperarm_R, forearm: lowerarm_R, hand: hand_R, thigh: thigh_R, shank: calf_R, foot: foot_R}
+  hand_point: {left: middle00_L, right: middle00_R}   # MB-Lab bone whose head approximates the palm centre

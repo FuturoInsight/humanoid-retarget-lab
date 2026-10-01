@@ -1,0 +1,36 @@
+# Check thresholds + per-clip verdict rules. Every number here is a tunable engineering choice, not a
+# real robot's spec. Share-of-frames values are fractions (0.05 = 5 %).
+k1_fk_error:            # FK of the retargeted joint angles vs the scaled human hand target
+  mean_cm_warn: 3.0
+  max_cm_warn: 10.0
+k2_position_limits:
+  tolerance_deg: 1.0    # ignore overshoot smaller than this
+  share_warn: 0.02
+  share_fail: 0.30
+k3_velocity_limits:
+  share_warn: 0.02
+  share_fail: 0.30
+k4_clamp_distortion:    # hand position difference raw vs clamped
+  mean_cm_warn: 3.0
+  max_cm_warn: 10.0
+  mean_cm_fail: 8.0
+  max_cm_fail: 30.0
+k5_reach_envelope:
+  tolerance_cm: 3.0     # target is "inside" if a workspace sample lies within this distance
+  share_warn: 0.02
+  share_fail: 0.20
+k6_foot_sliding:
+  contact_height_cm: 6.0       # foot joint within this of the floor => contact
+  slide_speed_mps: 0.15        # horizontal speed during contact above this => sliding frame
+  share_warn: 0.10
+k7_self_collision:
+  share_warn: 0.02
+  share_fail: 0.15
+k8_jitter:
+  cutoff_hz: 8.0
+  hf_rms_deg_warn: 0.5
+verdict:
+  # NOT FEASIBLE if ANY of these fail-level conditions is met
+  not_feasible_if: [k2_share_fail, k3_share_fail, k4_fail, k5_share_fail, k7_share_fail]
+  # otherwise USABLE WITH CLAMPING if any warn-level condition is met
+  clamp_if: [k2_share_warn, k3_share_warn, k4_warn, k5_share_warn, k7_share_warn]

@@ -1,0 +1,31 @@
+# CMU (Hahne MotionBuilder-friendly BVH naming) -> MB-Lab bone map.
+#   target bone : { src: <BVH joint whose world rotation drives the bone>,
+#                   dir: <BVH joint at the far end of that segment; used to measure the T-pose bone direction> }
+# A BVH joint's rotation moves the segment from that joint to its child, which is why `dir` is the child joint.
+# Bones not listed (fingers, twist bones, breasts) keep their rest pose relative to their parent.
+root_translation:
+  src: Hips            # hip translation is copied (scaled by leg-length ratio) onto the target `pelvis_bone`
+  target: pelvis
+bones:
+  pelvis:      {src: Hips,          dir: LowerBack}
+  spine01:     {src: LowerBack,     dir: Spine}
+  spine02:     {src: Spine,         dir: Spine1}
+  spine03:     {src: Spine1,        dir: Neck}
+  neck:        {src: Neck,          dir: Head}
+  head:        {src: Head,          dir: Head_End}
+  clavicle_L:  {src: LeftShoulder,  dir: LeftArm}
+  upperarm_L:  {src: LeftArm,       dir: LeftForeArm}
+  lowerarm_L:  {src: LeftForeArm,   dir: LeftHand}
+  hand_L:      {src: LeftHand,      dir: LeftFingerBase}
+  clavicle_R:  {src: RightShoulder, dir: RightArm}
+  upperarm_R:  {src: RightArm,      dir: RightForeArm}
+  lowerarm_R:  {src: RightForeArm,  dir: RightHand}
+  hand_R:      {src: RightHand,     dir: RightFingerBase}
+  thigh_L:     {src: LeftUpLeg,     dir: LeftLeg}
+  calf_L:      {src: LeftLeg,       dir: LeftFoot}
+  foot_L:      {src: LeftFoot,      dir: LeftToeBase}
+  toes_L:      {src: LeftToeBase,   dir: LeftToeBase_End}
+  thigh_R:     {src: RightUpLeg,    dir: RightLeg}
+  calf_R:      {src: RightLeg,      dir: RightFoot}
+  foot_R:      {src: RightFoot,     dir: RightToeBase}
+  toes_R:      {src: RightToeBase,  dir: RightToeBase_End}
