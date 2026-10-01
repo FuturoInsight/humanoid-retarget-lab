@@ -92,6 +92,8 @@ MB-Lab rig, then robot-skeleton trajectories, then the **Robot Demonstration Dat
 * **Character creation: scripted/headless** (`bpy.ops.mbast.init_character()`, character `m_ca01`, male). `docs/character_setup.md` has the install steps and a manual fallback.
 * Analysis environment: Python 3.14 venv (the spec asked for 3.11; `requires-python >= 3.11`), numpy/scipy/pandas/pyarrow/matplotlib/jinja2/typer.
 
+License: MIT (`LICENSE`). Data and tools keep their own licenses (see `data/SOURCES.md`).
+
 ## Reproduce
 
 ```bash
@@ -106,7 +108,7 @@ make test lint
 
 ## Repo layout
 
-`index.html` (GitHub Pages landing page) · `config/` (robot, thresholds, bone map, run config) · `scripts/` (Blender-side, `bpy`) · `src/retarget_lab/` (testable analysis package: `bvh`, `skeleton`, `kinematics/`, `retarget/`, `checks`, `report`, `export`, ...) · `tests/` · `templates/report.html.j2` · `docs/` · `outputs/sample/` (the committed sample run; Blender intermediates are gitignored) · `DECISIONS.md` (every deviation from the spec).
+`index.html` (GitHub Pages landing page) · `index.html` (GitHub Pages landing page) · `config/` (robot, thresholds, bone map, run config) · `scripts/` (Blender-side, `bpy`) · `src/retarget_lab/` (testable analysis package: `bvh`, `skeleton`, `kinematics/`, `retarget/`, `checks`, `report`, `export`, ...) · `tests/` · `templates/report.html.j2` · `docs/` · `outputs/sample/` (the committed sample run; Blender intermediates are gitignored) · `DECISIONS.md` (every deviation from the spec).
 
 ## Limitations
 
